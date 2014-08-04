@@ -9,8 +9,9 @@ get '/' do
   erb :index
 end
 
-post '/' do
-  $serial_port.write(1)
+post '/:mode' do
+  $mode = params[:mode]
+  $serial_port.write($mode[0])
   redirect '/', 302
 end
 
@@ -25,8 +26,12 @@ __END__
   </head>
 
   <body>
-    <form action="/" method="post">
-      <input type="submit" value="Change gate state" style="height:150px; width:100%"/>
+    <form action="/open" method="post">
+      <input type="submit" value="OPEN (one command)" style="height:150px; width:100%"/>
+    </form>
+    <br/>
+    <form action="/close" method="post">
+      <input type="submit" value="CLOSE (double command)" style="height:150px; width:100%"/>
     </form>
   </body>
 </html>
