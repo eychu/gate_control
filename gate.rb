@@ -27,11 +27,11 @@ __END__
 
   <body>
     <form action="/open" method="post">
-      <input type="submit" value="OPEN (one command)" style="height:150px; width:100%"/>
+      <input type="submit" value="one command" style="height:150px; width:100%"/>
     </form>
     <br/>
     <form action="/close" method="post">
-      <input type="submit" value="CLOSE (double command)" style="height:150px; width:100%"/>
+      <input type="submit" value="double command" style="height:150px; width:100%"/>
     </form>
   </body>
 </html>

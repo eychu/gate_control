@@ -1,5 +1,5 @@
 int relayPin = 9;
-int sendTime = 800;
+int sendTime = 1000;
 int delayTime = 5000;
 
 unsigned long changeTime = delayTime;
