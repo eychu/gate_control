@@ -2,7 +2,8 @@ require 'sinatra'
 require 'serialport'
 
 configure do
-  $serial_port = SerialPort.new("/dev/ttyACM0", 9600, 8, 1, SerialPort::NONE)
+  device = Dir.entries("/dev").select{|i| i =~ /ttyACM|ttyUSB/ }.first
+  $serial_port = SerialPort.new("/dev/#{device}", 9600, 8, 1, SerialPort::NONE)
 end
 
 get '/' do
