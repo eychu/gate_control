@@ -28,7 +28,7 @@ __END__
 
   <body>
     <form action="/open" method="post">
-      <input type="submit" value="one command" style="height:150px; width:100%"/>
+      <input type="submit" value="single command" style="height:150px; width:100%"/>
     </form>
     <br/>
     <form action="/close" method="post">
