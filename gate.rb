@@ -3,7 +3,7 @@ require 'serialport'
 
 configure do
   device = Dir.entries("/dev").select{|i| i =~ /ttyACM|ttyUSB/ }.first
-#  $serial_port = SerialPort.new("/dev/#{device}", 9600, 8, 1, SerialPort::NONE)
+  $serial_port = SerialPort.new("/dev/#{device}", 9600, 8, 1, SerialPort::NONE)
 end
 
 get '/' do
@@ -36,6 +36,12 @@ __END__
     </header>
     <div class="content">
       <div class="content-padded">
+        <form action="/open" method="post">
+          <button type="submit" class="btn btn-positive btn-block">Одинарное нажатие <span class="badge badge-positive">1</span></button>
+        </form>
+        <form action="/close" method="post">
+          <button type="submit" class="btn btn-primary btn-block">Двойное нажатие <span class="badge badge-primary">2</span></button>
+        </form>
         <h5>Описание работы:</h5>
         <p>Ворота могут находиться в двух состояниях: closed, opened. Переход между состояниями происходит по клику.
            Во время этого перехода мигает лампочка. Если нажать на кнопку при мигающей лампочке, ворота остановятся и
@@ -43,16 +49,9 @@ __END__
            открытии-закрытии ворот и погасании лампочки. При следующем клике начнется переход в противоположное состояние. 
         </p>
         <p>
-           Соответственно, "Одинарная комманда" используется для начала действия, например, для открытия ворот, 
-           затем "Двойная комманда" - для завершения открытия и начала закрытия ворот
+           Соответственно, "Одинарное нажатие" используется для начала действия, например, для открытия ворот, 
+           затем "Двойное нажатие" - для завершения открытия и начала закрытия ворот
         </p>
-	<h6>Убедительная просьба с воротами просто так не играть!</h6>
-	<form action="/open" method="post">
-	  <input type="submit" value="Одинарная комманда" class="btn btn-primary btn-block" />
-	</form>
-	<form action="/close" method="post">
-	  <input type="submit" value="Двойная комманда" class="btn btn-positive btn-block"/>
-	</form>
       </div>
     </div>
   </body>
