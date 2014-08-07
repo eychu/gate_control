@@ -3,7 +3,7 @@ require 'serialport'
 
 configure do
   device = Dir.entries("/dev").select{|i| i =~ /ttyACM|ttyUSB/ }.first
-  $serial_port = SerialPort.new("/dev/#{device}", 9600, 8, 1, SerialPort::NONE)
+#  $serial_port = SerialPort.new("/dev/#{device}", 9600, 8, 1, SerialPort::NONE)
 end
 
 get '/' do
@@ -23,16 +23,35 @@ __END__
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Door controller</title>
+    <meta charset="utf-8">
+    <title>Управление воротами</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="ratchet.min.css" rel="stylesheet">
   </head>
-
   <body>
-    <form action="/open" method="post">
-      <input type="submit" value="single command" style="height:150px; width:100%"/>
-    </form>
-    <br/>
-    <form action="/close" method="post">
-      <input type="submit" value="double command" style="height:150px; width:100%"/>
-    </form>
+    <header class="bar bar-nav">
+      <h1 class="title">Управление воротами</h1>
+    </header>
+    <div class="content">
+      <div class="content-padded">
+        <h5>Описание работы:</h5>
+        <p>Ворота могут находиться в двух состояниях: closed, opened. Переход между состояниями происходит по клику.
+           Во время этого перехода мигает лампочка. Если нажать на кнопку при мигающей лампочке, ворота остановятся и
+           переход будет считаться завершенным, лампочка погаснет. При следующем клике начнется переход в противоположное состояние.
+        </p>
+        <p>
+           Соответственно, "Одинарная комманда" используется для начала действия, например, для открытия ворот, затем "Двойная комманда" - для завершения открытия и начала закрытия ворот
+        </p>
+	<form action="/open" method="post">
+	  <input type="submit" value="Одинарная комманда" class="btn btn-primary btn-block" />
+	</form>
+	<form action="/close" method="post">
+	  <input type="submit" value="Двойная комманда" class="btn btn-positive btn-block"/>
+	</form>
+      </div>
+    </div>
   </body>
 </html>
+
